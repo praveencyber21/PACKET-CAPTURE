@@ -13,22 +13,28 @@ int main()
     bpf_u_int32 net_addr_int, net_mask_int; // Ip address as unsigned 32bit integer
     struct in_addr addr;
 
-    device_name = pcap_lookupdev(error);
-    printf("%s\n", device_name);
-    // device_name = pcap_findalldevs(device_name, error);
+    // device_name = pcap_lookupdev(error);
+    // printf("%s\n", device_name);
+    pcap_if_t *interfaces, *temp;
+    device_name = pcap_findalldevs(&interfaces, error);
 
-    if (device_name == NULL)
-    {
-        printf("[X] %s\n", error);
-        return -1;
-    }
+    // if (device_name == NULL)
+    // {
+    //     printf("[X] %s\n", error);
+    //     return -1;
+    // }
 
-    // With a device  in place, acquire the IP address and the Subnet Mask
-    return_code = pcap_lookupnet(device_name, &net_addr_int, &net_mask_int, error);
-    if (return_code == -1)
+    // // With a device  in place, acquire the IP address and the Subnet Mask
+    // return_code = pcap_lookupnet(device_name, &net_addr_int, &net_mask_int, error);
+    // if (return_code == -1)
+    // {
+    //     printf("[X] %s\n", error);
+    //     return -1;
+    // }
+
+    if (device_name == -1)
     {
-        printf("[X] %s\n", error);
-        return -1;
+        printf("[X] ")
     }
 
     // Convert the 32 bit of IP and Mask into human readable
